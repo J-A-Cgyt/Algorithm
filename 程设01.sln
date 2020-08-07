@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "程设01", "程设01\程设
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CS_02", "CS_02\CS_02.vcxproj", "{960542A8-DE6B-4B9D-9345-19DF3477DD6E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Algorithm_GPU", "Algorithm_GPU\Algorithm_GPU.vcxproj", "{7B66377F-7186-41C9-A186-056232B0678D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,12 @@ Global
 		{960542A8-DE6B-4B9D-9345-19DF3477DD6E}.Release|x64.Build.0 = Release|x64
 		{960542A8-DE6B-4B9D-9345-19DF3477DD6E}.Release|x86.ActiveCfg = Release|Win32
 		{960542A8-DE6B-4B9D-9345-19DF3477DD6E}.Release|x86.Build.0 = Release|Win32
+		{7B66377F-7186-41C9-A186-056232B0678D}.Debug|x64.ActiveCfg = Debug|x64
+		{7B66377F-7186-41C9-A186-056232B0678D}.Debug|x64.Build.0 = Debug|x64
+		{7B66377F-7186-41C9-A186-056232B0678D}.Debug|x86.ActiveCfg = Debug|x64
+		{7B66377F-7186-41C9-A186-056232B0678D}.Release|x64.ActiveCfg = Release|x64
+		{7B66377F-7186-41C9-A186-056232B0678D}.Release|x64.Build.0 = Release|x64
+		{7B66377F-7186-41C9-A186-056232B0678D}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
