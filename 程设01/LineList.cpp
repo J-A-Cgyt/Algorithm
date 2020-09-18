@@ -21,7 +21,7 @@ List* CreateList(int MAX)
 {
 	List* ListPoint;
 	ListPoint = (List*)malloc(sizeof(List));
-	ListPoint->Datapoint = (Data*)malloc(MAX*sizeof(Data));
+	ListPoint->Datapoint = (Data*)malloc(MAX * sizeof(Data));
 	ListPoint->Max = MAX;
 	ListPoint->Length = 0;
 	return ListPoint;
@@ -62,7 +62,7 @@ int InsetData(Data xin, int Location, List* ListPoint)
 
 int DeleteData(int Location, List* ListPoint)
 {
-	if (Location < ListPoint->Length&&Location>0)
+	if (Location<ListPoint->Length && Location>0)
 	{
 		for (int i = Location; i < ListPoint->Length; i++)
 		{

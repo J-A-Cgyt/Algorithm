@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="HeapSort.cpp" />
+    <ClCompile Include="ErChaShu.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{847C423F-F3EF-4079-9179-B685ACE830E2}</ProjectGuid>
