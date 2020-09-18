@@ -3,8 +3,6 @@
 #include <stdio.h>
 #include <vector>
 
-
-
 int main()
 {
 	int QueueSrc[1000];
@@ -25,10 +23,7 @@ int main()
 		int j = i - 1;
 		while ((j >= 0) & (QueueSrc[j] > temp))
 		{
-			if (temp < QueueSrc[j])
-			{
-				QueueSrc[j + 1] = QueueSrc[j];
-			}
+			QueueSrc[j + 1] = QueueSrc[j];
 			j = j - 1;
 		}
 		QueueSrc[j + 1] = temp;
