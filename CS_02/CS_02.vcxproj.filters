@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Insert_Sort.cpp">
+    <ClCompile Include="hash_table.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

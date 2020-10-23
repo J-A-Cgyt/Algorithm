@@ -1,5 +1,5 @@
 //数据结构还是基本的东西，二叉树实现一下
-#include <stdio.h>
+#include "head_CS01.h"
 
 //成员函数通过一个名为‘this’的额外隐式参数来访问调用它的那个对象
 namespace ECS_CGYT //尝试使用面向对象构建，节点类
@@ -103,7 +103,7 @@ namespace ECS_CGYT //尝试使用面向对象构建，节点类
 		}
 
 	public:
-		Tree_bin(ECS_CGYT::JieDian Root)  //创建树以及一个根节点
+		Tree_bin(ECS_CGYT::JieDian &Root)  //创建树以及一个根节点
 		{	
 			this->FristRoot = &Root;
 			Root.setNode(nullptr, nullptr, nullptr);
@@ -111,12 +111,12 @@ namespace ECS_CGYT //尝试使用面向对象构建，节点类
 			this->Num_JieDian = 1;
 		}
 
-		void addNode(JieDian NewNode, JieDian* Father,int Position)  //在尾部增加一个节点
+		void addNode(JieDian &NewNode, JieDian &Father,int Position)  //在尾部增加一个节点
 		{
-			if (Father->isNotFull())//
+			if (Father.isNotFull())//
 			{
-				Father->setNode(&NewNode, Position);
-				NewNode.setNode(Father, FATHER);
+				Father.setNode(&NewNode, Position);
+				NewNode.setNode(&Father, FATHER);
 				NewNode.setNode(nullptr, LEFT);
 				NewNode.setNode(nullptr, RIGHT);
 				NewNode.setIndex(this->Num_JieDian);
@@ -126,7 +126,7 @@ namespace ECS_CGYT //尝试使用面向对象构建，节点类
 			{
 				printf("子节点已满，请使用INSERT方法");
 			}
-		}
+		} //此处也注意参数传递形式造成的影响
 		
 		JieDian* getRoot()
 		{
@@ -148,8 +148,9 @@ namespace ECS_CGYT //尝试使用面向对象构建，节点类
 //其实最好还是分俩文件分开实现
 int main()
 {
+
 	ECS_CGYT::JieDian Root;  //根节点声明
-	Root.setData(1);
+	Root.setData(2903);
 	ECS_CGYT::Tree_bin ErChaShu = ECS_CGYT::Tree_bin(Root);
 	
 	//增加一些节点
@@ -163,13 +164,24 @@ int main()
 	ECS_CGYT::JieDian* Node1;
 	ECS_CGYT::JieDian* Node2;
 
-	ErChaShu.addNode(JD1, ErChaShu.getRoot(), ECS_CGYT::LEFT);
-	ErChaShu.addNode(JD2, ErChaShu.getRoot(), ECS_CGYT::RIGHT);  //似乎重新分配了空间
+	ErChaShu.addNode(JD1, Root, ECS_CGYT::LEFT);
+	ErChaShu.addNode(JD2, Root, ECS_CGYT::RIGHT);  //注意引用，要对函数大改了20200926
 
 	Node1 = ErChaShu.getRoot();
 	Node2 = Node1->getNode(Node1, ECS_CGYT::LEFT);
 
-	ErChaShu.addNode(JD3, Node2, ECS_CGYT::LEFT);
+	ErChaShu.addNode(JD3, *Node2, ECS_CGYT::LEFT);
+	ErChaShu.addNode(JD4, *Node2, ECS_CGYT::RIGHT);
+	ErChaShu.addNode(JD5, JD4, ECS_CGYT::RIGHT);
+
+	//操作符重载的一些试验
+
+	box a = box(3, 2, 5);
+	box b = box(4, 3, 2);
+
+	a = b;      //若定义了重载的 =操作符 ，则此处使用重载的操作符
+	box c = a;  //此处的=用的并非是重载的操作符
+	b = 3.4;
 
 	return 0;
 }

@@ -20,6 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ErChaShu.cpp" />
+    <ClCompile Include="Over_Load.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="head_CS01.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{847C423F-F3EF-4079-9179-B685ACE830E2}</ProjectGuid>
