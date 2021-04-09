@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CS_02", "CS_02\CS_02.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Algorithm_GPU", "Algorithm_GPU\Algorithm_GPU.vcxproj", "{7B66377F-7186-41C9-A186-056232B0678D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SIMD_try", "SIMD_try\SIMD_try.vcxproj", "{B5780CF3-440B-4612-87C3-DF1F4BCAFE81}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -39,6 +41,14 @@ Global
 		{7B66377F-7186-41C9-A186-056232B0678D}.Release|x64.ActiveCfg = Release|x64
 		{7B66377F-7186-41C9-A186-056232B0678D}.Release|x64.Build.0 = Release|x64
 		{7B66377F-7186-41C9-A186-056232B0678D}.Release|x86.ActiveCfg = Release|x64
+		{B5780CF3-440B-4612-87C3-DF1F4BCAFE81}.Debug|x64.ActiveCfg = Debug|x64
+		{B5780CF3-440B-4612-87C3-DF1F4BCAFE81}.Debug|x64.Build.0 = Debug|x64
+		{B5780CF3-440B-4612-87C3-DF1F4BCAFE81}.Debug|x86.ActiveCfg = Debug|Win32
+		{B5780CF3-440B-4612-87C3-DF1F4BCAFE81}.Debug|x86.Build.0 = Debug|Win32
+		{B5780CF3-440B-4612-87C3-DF1F4BCAFE81}.Release|x64.ActiveCfg = Release|x64
+		{B5780CF3-440B-4612-87C3-DF1F4BCAFE81}.Release|x64.Build.0 = Release|x64
+		{B5780CF3-440B-4612-87C3-DF1F4BCAFE81}.Release|x86.ActiveCfg = Release|Win32
+		{B5780CF3-440B-4612-87C3-DF1F4BCAFE81}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

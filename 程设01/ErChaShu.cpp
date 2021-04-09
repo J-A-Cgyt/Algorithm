@@ -12,7 +12,7 @@ namespace ECS_CGYT //尝试使用面向对象构建，节点类
 	};
 	class JieDian  //二叉树的节点类
 	{
-	private:
+	public:
 		JieDian* Father;
 		JieDian* LeftKid;
 		JieDian* RightKid;
@@ -143,6 +143,103 @@ namespace ECS_CGYT //尝试使用面向对象构建，节点类
 			Son->setNode(&NewNode,FATHER);
 		}
 	};
+
+//二叉搜索树相关的函数但是二叉搜索树地性质需要专有自行维护
+	//中序遍历
+	void InOrder_Tree_Walk(JieDian* root)
+	{
+		JieDian* x = root;
+		if (x)
+		{
+			InOrder_Tree_Walk(x->LeftKid);
+			printf("%d ", x->data);               //中序遍历必须得放在中间还
+			InOrder_Tree_Walk(x->RightKid);
+		}
+	}
+
+	//查询操作
+	JieDian* Search(JieDian* root, double data)
+	{
+		JieDian* x = root;
+
+		while (x != nullptr || x->data != data)
+		{
+			if (x->data > data)
+			{
+				x = x->LeftKid;
+			}
+			else
+			{
+				x = x->RightKid;
+			}
+		}
+			return root;
+	}
+
+	//最大关键字
+	JieDian* MaxKey(JieDian* root)
+	{
+		JieDian* x = root;
+		while (x->RightKid)
+		{
+			x = x->RightKid;
+		}
+		return x;
+	}
+
+	//最小关键字
+	JieDian* MinKey(JieDian* root)
+	{
+		JieDian* x = root;
+		while (x->RightKid)
+		{
+			x = x->RightKid;
+		}
+		return x;
+	}
+
+	//查找后继
+	JieDian* Successor(JieDian* x)
+	{
+		if (x->RightKid) //如果有右子树，那就从右子树里面找最小的
+		{
+			return MinKey(x->RightKid);
+		}
+		else
+		{
+			JieDian* y = x->Father;
+			while (y!=nullptr || x==y->RightKid) //不断往上爬 爬到向左上方向移植爬到被右上方向的线挡死，再往右一拐
+			{
+				x = y;
+				y = y->Father;
+			}
+			return y;
+		}
+	}
+
+	//查找前驱
+	JieDian* PreDecessor(JieDian* x)
+	{
+		if (x->LeftKid) //如果有左子树，那就从左子树里面找最大的，就是前驱
+		{
+			return MaxKey(x->LeftKid);
+		}
+		else
+		{
+			JieDian* y = x->Father;
+			while (y !=nullptr || x==y->LeftKid) //不断往上爬 爬到向右上方向移植爬到被左上方向的线挡死，再往左一拐
+			{
+				x = y;
+				y = y->Father;
+			}
+			return y;
+		}
+	}
+
+	void Insert(JieDian* x)
+	{
+		
+	}
 }
 
 //其实最好还是分俩文件分开实现
