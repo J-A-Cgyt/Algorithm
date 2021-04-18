@@ -6,10 +6,7 @@
 #include <set>
 #include <stack>
 #include <algorithm>
-#include <complex>  //STL¸´Êý¿â
-
-
-#define BINARYTREE
+#include <complex>       //STL¸´Êý¿â
 
 #ifdef USED
 int maxProfit(std::vector<int>& prices);
@@ -34,6 +31,8 @@ using std::string;
 using std::vector;
 using std::map;
 using std::stack;
+
+#define MATH
 
 #ifdef CHAINLIST
 struct ListNode {
@@ -70,4 +69,56 @@ bool isSymmetric(TreeNode* root);
 TreeNode* mirrorTree(TreeNode* root);
 
 vector<vector<int>> levelOrder(TreeNode* root);
+
+TreeNode* sortedArrayToBST(vector<int>& nums);
+#endif
+
+#ifdef SORTANDSEARCH
+void merge(vector<int>& nums1, int m, vector<int>& nums2, int n);
+
+#endif
+
+#ifdef DYNAMICPROG
+int climbStairs(int n);
+
+int maxProfit(vector<int>& prices);
+
+int maxSubArray(vector<int>& nums);
+
+int rob(vector<int>& nums);
+#endif
+
+#ifdef DESIGN
+struct ListNode {
+	int val;
+	ListNode *next;
+	ListNode() : val(0), next(nullptr) {}
+	ListNode(int x) : val(x), next(nullptr) {}
+	ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+class MinStack {
+public:
+	/** initialize your data structure here. */
+	MinStack():min(0x7FFFFFFF) { 
+		topPtr = new ListNode();
+		bottomPtr = topPtr;
+	}
+
+	void push(int val); 
+	void pop();
+	int top();
+	int getMin();
+
+private:
+	int min;
+	ListNode* topPtr;
+	ListNode* bottomPtr;
+};
+#endif
+
+#ifdef MATH
+
+int countPrimes(int n);
+
 #endif

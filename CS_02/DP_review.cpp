@@ -12,7 +12,7 @@ int main() {
 	rotate(matrix);
 	std::vector<std::vector<char>> board = { line1,line2,line3,line4,line5,line6,line7,line8,line9 };
 	bool flag = isValidSudoku(board);
-	std::vector<int> prices = {1,2,2,3,4,5,0,8,0,8,5,0 };
+	std::vector<int> prices = { 1,2,2,3,4,5,0,8,0,8,5,0 };
 	return maxProfit(prices);
 	rotate(prices, 3);
 	func(0);
@@ -20,7 +20,7 @@ int main() {
 	moveZeroes(prices);
 	std::vector<char> s = { 'h','e','l','l','o','w' };
 	reverseString(s);
-	int x = firstUniqChar(s);	
+	int x = firstUniqChar(s);
 	std::string t("abaa");
 	bool flag = isAnagram(s, t);
 	std::string s("-2147483647");
@@ -47,10 +47,7 @@ int main() {
 	//temp->next = new ListNode(6);
 	//temp = mergeTwoLists(head1, head2);
 	bool x = isPalindrome(head1);
-#endif // CHAINLIST
 
-#ifdef BINARYTREE
-	//建立一棵树
 	TreeNode *root = new TreeNode(5);
 	TreeNode *nodePtr;
 	root->left = new TreeNode(4);
@@ -65,15 +62,51 @@ int main() {
 	nodePtr = nodePtr->right;
 	nodePtr->left = new TreeNode(2);
 
+#endif // CHAINLIST
 
-#endif
+#ifdef BINARYTREE
+	//建立一棵树
+	TreeNode *root = new TreeNode(1);
+	TreeNode *nodePtr;
+	//root->left = new TreeNode(2);
+	//root->right = new TreeNode(3);
+	//root->left->left = new TreeNode(4);
+	//root->left->right = new TreeNode(5);
+	//root->right->left = new TreeNode(6);
+	//root->right->right = new TreeNode(7);
+
+	vector<int> nums = { 1,2,3,4,5 };
 
 	//int Depth = maxDepth(root);
 	//bool x = isValidBST(root);
-	bool x = isSymmetric(root);
-
+	//bool x = isSymmetric(root);
+	//levelOrder(root);
 	//tempRoot = mirrorTree(root);
+	nodePtr = sortedArrayToBST(nums);
+#endif
 
+#ifdef SORTANDSEARCH
+
+	vector<int> nums1 = { 1,2,3,0,0 };
+	vector<int> nums2 = { 4,5 };
+	merge(nums1, 6, nums2, 3);
+
+#endif
+
+#ifdef DYNAMICPROG
+	//vector<int> prices = { -2,-1 };
+	vector<int> prices = { 2,1,1,2  };
+	//vector<int> prices = { 2,0,-3,2,1,0,1,-2 };
+	//vector<int> prices = { -1,6,7,-7,-2,-6,-1,3,4,2,6,-3,-8,-1,7 };
+	//int profi = maxProfit(prices);
+	//int sumMax = maxSubArray(prices);
+	int res = rob(prices);
+
+#endif
+
+#ifdef MATH
+	int res = countPrimes(10);
+#endif
 	return 0;
 }
 
@@ -749,18 +782,320 @@ bool isSymmetric(TreeNode* root) {
 			return false;
 		}
 	}
-
 	return true;
 }
 
-//二叉树层序遍历
+//4二叉树层序遍历 广度优先遍历 用队列实现 还是要弄一个队列啥的存起来
 vector<vector<int>> levelOrder(TreeNode* root) {
-	vector<TreeNode*> visitList;
-	//visitList.push_back(root);
-	stack<TreeNode*,vector<TreeNode*>> visitStack(visitList); //整一个栈
-	while (true) {
+	if (root == nullptr) {
+		return vector<vector<int>>();
+	}
 
+	vector<TreeNode*> visitQueue;
+	visitQueue.push_back(root);
+	
+	vector<int> levelNum;
+	levelNum.push_back(1);
+	//levelNum.push_back(0);
+	
+	int temp;
+	int lIndex(0);
+	int nowLevel(0);
+
+	for (size_t x = 0; x < visitQueue.size(); x++) {
+		temp = 0;
+		if (visitQueue[x]->left != nullptr) {
+			visitQueue.push_back(visitQueue[x]->left);
+			temp++;
+		}
+		if (visitQueue[x]->right != nullptr) {
+			visitQueue.push_back(visitQueue[x]->right);
+			temp++;
+		}
+
+		//层级计数
+		if (nowLevel > 0) {
+			//*(levelNum.end()-1) += temp;
+			levelNum[lIndex] += temp;
+			nowLevel--;
+		}
+		else {
+			nowLevel = levelNum[lIndex];
+			lIndex += 1;
+			levelNum.push_back(temp);
+			nowLevel--;
+		}
+	}
+
+	vector<vector<int>> res(levelNum.size() - 1);
+	auto treeNodeIter = visitQueue.begin();
+	for (size_t id = 0; id < levelNum.size() - 1; id++) {
+		int number = 0;
+		while (number < levelNum[id]) {
+			res[id].push_back((*treeNodeIter)->val);
+			treeNodeIter++;
+			number++;
+		}
+	}
+
+	return res;
+}
+
+//5有序数组转换为二叉搜索树 预计是二分搜索即可  这居然一把过了
+TreeNode* sortedArrayToBST(vector<int>& nums) {
+	size_t nSize = nums.size();
+	if (nSize == 0) { return nullptr; }
+	else if (nSize == 1) {
+		return new TreeNode(nums[0]);
+	}
+	else {
+		TreeNode* rootLocal = new TreeNode(nums[(nSize) / 2]);
+
+		auto numPtr = nums.begin() + (nSize/2);
+		auto numPtr2 = numPtr + 1;
+
+		vector<int> left(vector<int>(nums.begin(), numPtr));
+		vector<int> right(vector<int>(numPtr2, nums.end()));
+
+		rootLocal->left = sortedArrayToBST(left);
+		rootLocal->right = sortedArrayToBST(right);
+
+		return rootLocal;
 	}
 }
 
-#endif // 
+#endif // 树的相关方法
+
+#ifdef SORTANDSEARCH
+//还是用插入排序吧
+void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+	vector<int> buffer(nums1.begin(), nums1.begin() + (m - n));
+	auto iterA = buffer.begin();
+	auto iterB = nums2.begin();
+	int x = 0;
+	while (iterA < buffer.end() || iterB < nums2.end()) {
+		if (iterB == nums2.end()) {
+			nums1[x] = *iterA;
+			iterA++;
+		}
+		else if (iterA == buffer.end()) {
+			nums1[x] = *iterB;
+			iterB++;
+		}	
+		else if (*iterA < *iterB) {
+			nums1[x] = *iterA;
+			iterA++;
+		}
+		else if (*iterA >= *iterB) {
+			nums1[x] = *iterB;
+			iterB++;
+		}
+		x++;
+	}
+
+	return;
+}
+#endif
+
+#ifdef DYNAMICPROG
+int climbStairs(int n){ //不用动态规划倒是也可以做嗷
+	int buffer[2];
+	buffer[0] = 1; buffer[1] = 1;
+	int temp;
+	for (int i = 0; i < n-1; i++) {
+		temp = buffer[0] + buffer[1];
+		buffer[0] = buffer[1];
+		buffer[1] = temp;
+	}
+	return buffer[1];
+
+}
+
+int maxProfit(vector<int>& prices) {
+	/*
+	//暴力解法时间超限
+
+
+	for (size_t i = 0; i < days; i++) {
+		int in = prices[i];
+		for (int j = i + 1; j < days; j++) {
+			if (in > prices[j]) {
+				break;
+			}
+			else if (prices[j]-in>max) {
+				max = prices[j] - in;
+			}
+		}
+	}
+	return max;
+	*/
+	size_t days = prices.size();
+	int min = prices[0];
+	int max = 0;
+	for (size_t i = 0; i < days; i++) {
+		if (min > prices[i]) { min = prices[i]; }
+		if (prices[i] - min > max) { max = prices[i] - min; }
+	}
+	return max;
+}
+
+struct subInfo {
+	size_t begin;
+	size_t end;
+	int sum;
+
+	subInfo(size_t, size_t, int);
+};
+
+subInfo::subInfo(size_t begin,size_t end,int sum)
+	:begin(begin),end(end),sum(sum) {
+
+}
+
+int maxSubArray(vector<int>& nums) {
+	int max = 0x80000000;
+	subInfo subA(0, 0, nums[0]);
+	subInfo subB(0, 0, nums[0]);
+	/*
+		1、最大子数组必定连续，则从头开始计数求和时 某段的最大子数组即是正值求和，且实时地保存最大值 还是不是很明朗
+		也许画图和选择会给程序带来一些理解上的帮助
+	*/
+
+	for (size_t i = 1; i < nums.size(); i++) {
+		if (subA.sum + nums[i] < nums[i]) {
+			subA.sum = nums[i];
+			subA.begin = i;
+			subA.end = i;
+		}
+		else {
+			subA.sum += nums[i];
+			subA.end = i;
+		}
+
+		if (subB.sum < subA.sum) {
+			subB.begin = subA.begin;
+			subB.end = subA.end;
+			subB.sum = subA.sum;
+		}
+	}
+
+	max = subB.sum;
+
+	return max;
+}
+
+int rob(vector<int>& nums) {
+	if (nums.size() == 1) {
+		return nums[0];
+	}
+	int totalA = nums[0];
+	int totalB = nums[1] > nums[0] ? nums[1] : nums[0];
+	auto iter = nums.begin() + 2;
+	for (; iter < nums.end(); iter++) {
+		if (totalA + iter[0] > totalB) {
+			int temp = totalB;
+			totalB = totalA + iter[0];
+			totalA = temp;
+		}
+		else {
+			totalA = totalB;
+		}
+	}
+	int total = totalA > totalB ? totalA : totalB;
+	return total;
+}
+#endif
+
+#ifdef DESIGN
+//打乱数组
+#include <random>
+struct SolutionA
+{
+	SolutionA(vector<int>& nums):nums(nums) { }
+
+	/** Resets the array to its original configuration and return it. */
+	vector<int> reset() {
+		return nums;
+	}
+
+	/** Returns a random shuffling of the array. */
+	vector<int> shuffle() {
+		size_t restNum = nums.size();
+		vector<int> res(restNum);
+		vector<int> src(nums);
+		auto iterSrc = src.begin();
+		auto iterDst = res.begin();
+
+		static std::default_random_engine e; //随机数引擎
+
+		for (; iterDst < res.end(); iterDst++) {
+			std::uniform_int_distribution<size_t> y(0, restNum - 1); //分布类型对象 返回类型为size_t的平均分布类型
+			size_t idx = y(e);
+			iterDst[0] = iterSrc[idx];
+
+			iterSrc[idx] = iterSrc[restNum - 1];
+
+			restNum--;
+		}
+		return res;
+	}
+
+private:
+	vector<int> nums;
+
+};
+
+void MinStack::push(int val) {
+	ListNode* newNode = new ListNode(val,topPtr);
+	topPtr = newNode;
+	if (min > val) { min = val; }
+}
+
+void MinStack::pop() {
+	ListNode* temp = topPtr;
+	topPtr = topPtr->next;
+	delete temp;
+}
+
+int MinStack::top() {
+	return topPtr->val;
+}
+
+int MinStack::getMin() {
+	return min;
+}
+
+#endif // DESIGN
+
+#ifdef MATH
+
+vector<string> fizzBuzz(int n) {
+	vector<string> res(n);
+	for (size_t i = 0; i < n; i++) {
+		if ((i + 1) % 3 == 0 || (i + 1) % 5 == 0) {
+			if ((i + 1) % 3 == 0) { res[i].append("Fizz"); }
+			if ((i + 1) % 5 == 0) { res[i].append("Buzz"); }
+		}
+		else {
+			res[i] = std::to_string(i);
+		}
+	}
+	return res;
+}
+
+int countPrimes(int n) {
+	vector<int> numbers(n);
+	numbers[0] = 0;
+	for (int x = 1; x < n; x++) {
+		numbers[n] = n + 1;
+	}
+
+	for (int i = 1; i*i <= n; i++) {
+		while (numbers[i] == 0) {
+			i++;
+		}
+	}
+
+}
+
+#endif
