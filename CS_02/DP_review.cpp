@@ -105,7 +105,7 @@ int main() {
 #endif
 
 #ifdef MATH
-	int res = countPrimes(10);
+	int res = countPrimes(20);
 #endif
 	return 0;
 }
@@ -1084,17 +1084,6 @@ vector<string> fizzBuzz(int n) {
 }
 
 int countPrimes(int n) {
-	vector<int> numbers(n);
-	numbers[0] = 0;
-	for (int x = 1; x < n; x++) {
-		numbers[n] = n + 1;
-	}
-
-	for (int i = 1; i*i <= n; i++) {
-		while (numbers[i] == 0) {
-			i++;
-		}
-	}
 
 }
 
