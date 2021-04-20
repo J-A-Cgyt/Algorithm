@@ -15,10 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DP_review.cpp">
+    <ClCompile Include="dipStudy_selfFFT.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="dipStudy_selfFFT.cpp">
+    <ClCompile Include="alg_2.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

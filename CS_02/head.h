@@ -3,6 +3,7 @@
 #include <vector>
 #include <map>
 #include <unordered_set>
+#include <unordered_map>
 #include <set>
 #include <stack>
 #include <algorithm>
@@ -31,8 +32,6 @@ using std::string;
 using std::vector;
 using std::map;
 using std::stack;
-
-#define MATH
 
 #ifdef CHAINLIST
 struct ListNode {
@@ -120,5 +119,17 @@ private:
 #ifdef MATH
 
 int countPrimes(int n);
+
+int romanToInt(string s);
+
+#endif
+
+#ifdef OTHERS
+int hammingWeight(uint32_t n);
+
+vector<vector<int>> generate(int numRows);
+
+bool isValid(string s);
+
 
 #endif

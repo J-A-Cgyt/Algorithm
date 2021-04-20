@@ -105,7 +105,16 @@ int main() {
 #endif
 
 #ifdef MATH
-	int res = countPrimes(20);
+	string rome("VIII");
+	int res = romanToInt(rome);
+#endif
+
+#ifdef OTHERS
+	//uint32_t src = 0x0000000f;
+	//int res = hammingWeight(src);
+	//vector<vector<int>> x = generate(5);
+	string s = ("{(})");
+	bool x = isValid(s);
 #endif
 	return 0;
 }
@@ -1084,7 +1093,126 @@ vector<string> fizzBuzz(int n) {
 }
 
 int countPrimes(int n) {
-
+	return 0;
 }
+
+int romanToInt(string s) {
+	map<char, int> rome2Int;
+	rome2Int['I'] = 1;	  rome2Int['V'] = 5;    rome2Int['X'] = 10;
+	rome2Int['L'] = 50;	  rome2Int['C'] = 100;	rome2Int['D'] = 500;
+	rome2Int['M'] = 1000;
+
+	int res = 0;
+
+	for (int i = 0; i < s.size(); i++) {
+		if ((i < s.size() - 1) && rome2Int[s[i]] < rome2Int[s[i + 1]]) {
+			res -= rome2Int[s[i]];
+		}
+		else {
+			res += rome2Int[s[i]];
+		}
+	}
+
+	return res;
+}
+
+#endif
+
+#ifdef OTHERS
+int hammingWeight(uint32_t n) {
+	int res=0;
+	for (int i = 0; i < 32; i++) {
+		if (n & 1 == 1) {
+			res++;
+		}
+		n = n >> 1;
+	}
+
+	return res;
+}
+
+int hammingDistance(int x, int y) {
+	int diff = x ^ y;
+	int res = 0;
+	for (int i = 0; i < 32; i++) {
+		if (diff & 1 == 1) {
+			res++;
+		}
+		diff = diff >> 1;
+	}
+
+	return res;
+}
+
+uint32_t reverseBits(uint32_t n) {
+	uint32_t res = 0;
+	uint32_t bitJudge1 = 0x0000001;
+	uint32_t bitJudge0 = 0x0000000;
+	for (int i = 0; i < 31; i++) {
+		if (n & 1 == 1) {
+			res = bitJudge1 | res;
+		}
+		else {
+			res = bitJudge0 | res;
+		}
+		n = n >> 1;
+		res = res << 1;
+	}
+	if (n == 1) {
+		res += 1;
+	}
+
+	return res;
+}
+
+vector<vector<int>> generate(int numRows) {
+	vector<vector<int>> res(numRows);
+	res[0].push_back(1);
+	for (int i = 1; i < numRows; i++) {
+		res[i].push_back(1);
+		for (int j = 1; j < i; j++) {
+			res[i].push_back(res[i - 1][j - 1] + res[i - 1][j]);
+		}
+		res[i].push_back(1);
+	}
+	return res;
+}
+
+bool isValid(string s) {
+
+	string s_stk("");
+	for (int i = 0; i < s.size(); i++) {
+		switch (s[i])
+		{
+		case '[':
+			s_stk.push_back('A');
+			break;
+		case '{':
+			s_stk.push_back('B');
+			break;
+		case '(':
+			s_stk.push_back('C');
+			break;
+		case ']':
+			if (s_stk.back() != 'A') { return false; }
+			else { s_stk.erase(s_stk.end() - 1); }
+			break;
+		case '}':
+			if (s_stk.back() != 'B') { return false; }
+			else { s_stk.erase(s_stk.end() - 1); }
+			break;
+		case ')':
+			if (s_stk.back() != 'C') { return false; }
+			else { s_stk.erase(s_stk.end() - 1); }
+			break;
+
+		default:
+			break;
+		}
+	}
+	if (s_stk.size() != 0) { return false; }
+	else { return true; }
+}
+
 
 #endif
