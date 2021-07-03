@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ErChaShu.cpp" />
+    <ClCompile Include="HeapSort.cpp" />
     <ClCompile Include="Over_Load.cpp" />
   </ItemGroup>
   <ItemGroup>

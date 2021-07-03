@@ -1,8 +1,8 @@
 #include <stdio.h>
 
 //节点序计算宏定义
-#define LEFT(i) (i<<1)-1;        //左节点序计算
-#define RIGHT(i) i<<1;   //右节点序计算
+#define LEFT(i) (i<<1)-1;    //左节点序计算
+#define RIGHT(i) i<<1;       //右节点序计算
 #define FATHER(i) i>>1;      //父节点序计算
 
 int Data[10] = { 1,53,2,6,32,31,8,64,9,45 };
@@ -26,7 +26,7 @@ int main()
 	{
 		int temp = Data[0];
 		Data[0] = Data[i];
-		Data[i] = temp;     //每次都拿出最上面那个最大的 放到队尾，然后减少树的长度重建堆
+		Data[i] = temp;            //每次都拿出最上面那个最大的 放到队尾，然后减少树的长度重建堆
 		len = len - 1;
 		MAX_heapify(Data, 0, len);  //将新的堆重新整理为最大堆，保证其循环不变量
 	}
